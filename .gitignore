@@ -17,6 +17,5 @@ target/
 
 # Env / Secrets
 .env
-application.properties
 *.pem
 r
