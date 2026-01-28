@@ -1,8 +1,11 @@
 import AppRoutes from './app/routes';
-import { ThemeProvider,CssBaseline } from '@mui/material';
+import Header from './components/assistant/layout/Header';
 function App() {
   return (
-    <AppRoutes/>
+    <>
+      <Header />
+      <AppRoutes />
+    </>
   );
 }
 
