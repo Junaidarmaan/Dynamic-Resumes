@@ -1,109 +1,168 @@
 import { createTheme } from "@mui/material/styles";
-
+import { useEffect } from "react";
 /**
  * ===============================
- * 🎨 COLOR PALETTES
+ * 🎨 COLOR PALETTES (LIGHT + DARK)
  * ===============================
- * Switch theme by changing `ACTIVE_THEME`
  */
 
 const THEMES = {
-  // 1️⃣ Deep Indigo (Professional / SaaS / Hackathons)
-  indigoDark: {
-    name: "Indigo Dark",
-    palette: {
-      mode: "dark",
+  indigo: {
+    name: "Indigo",
+    light: {
+      palette: {
+        mode: "light",
 
-      primary: {
-        main: "#5B5FC7", // buttons, links, highlights
-      },
-      secondary: {
-        main: "#22C55E", // success, confirmations
-      },
+        primary: { main: "#5B5FC7" },
+        secondary: { main: "#22C55E" },
 
-      background: {
-        default: "#0B0F19", // app background
-        paper: "#111827", // cards, modals
-      },
+        background: {
+          default: "#F8FAFC",
+          paper: "#FFFFFF",
+        },
 
-      text: {
-        primary: "#E5E7EB", // main text
-        secondary: "#9CA3AF", // helper / muted text
+        text: {
+          primary: "#0F172A",
+          secondary: "#475569",
+        },
+      },
+    },
+    dark: {
+      palette: {
+        mode: "dark",
+
+        primary: { main: "#5B5FC7" },
+        secondary: { main: "#22C55E" },
+
+        background: {
+          default: "#0B0F19",
+          paper: "#111827",
+        },
+
+        text: {
+          primary: "#E5E7EB",
+          secondary: "#9CA3AF",
+        },
       },
     },
   },
 
-  // 2️⃣ Emerald Night (Fresh / Health / Finance / Clean UI)
-  emeraldDark: {
-    name: "Emerald Night",
-    palette: {
-      mode: "dark",
+  emerald: {
+    name: "Emerald",
+    light: {
+      palette: {
+        mode: "light",
 
-      primary: {
-        main: "#10B981", // calm green actions
-      },
-      secondary: {
-        main: "#38BDF8", // info / links
-      },
+        primary: { main: "#10B981" },
+        secondary: { main: "#38BDF8" },
 
-      background: {
-        default: "#020617", // very dark blue-black
-        paper: "#020617", // flat, minimal cards
-      },
+        background: {
+          default: "#F8FAFC",
+          paper: "#FFFFFF",
+        },
 
-      text: {
-        primary: "#ECFEFF", // crisp white text
-        secondary: "#94A3B8", // subtle guidance text
+        text: {
+          primary: "#0F172A",
+          secondary: "#475569",
+        },
+      },
+    },
+    dark: {
+      palette: {
+        mode: "dark",
+
+        primary: { main: "#10B981" },
+        secondary: { main: "#38BDF8" },
+
+        background: {
+          default: "#020617",
+          paper: "#020617",
+        },
+
+        text: {
+          primary: "#ECFEFF",
+          secondary: "#94A3B8",
+        },
       },
     },
   },
 
-  // 3️⃣ Rose Noir (Creative / AI / Portfolio / Bold products)
-  roseDark: {
-    name: "Rose Noir",
-    palette: {
-      mode: "dark",
+  rose: {
+    name: "Rose",
+    light: {
+      palette: {
+        mode: "light",
 
-      primary: {
-        main: "#F43F5E", // bold CTA, warnings
-      },
-      secondary: {
-        main: "#A855F7", // accents, tags
-      },
+        primary: { main: "#F43F5E" },
+        secondary: { main: "#A855F7" },
 
-      background: {
-        default: "#09090B", // near-black
-        paper: "#18181B", // elevated surfaces
-      },
+        background: {
+          default: "#FAFAFA",
+          paper: "#FFFFFF",
+        },
 
-      text: {
-        primary: "#FAFAFA", // strong contrast text
-        secondary: "#A1A1AA", // muted descriptions
+        text: {
+          primary: "#18181B",
+          secondary: "#52525B",
+        },
+      },
+    },
+    dark: {
+      palette: {
+        mode: "dark",
+
+        primary: { main: "#F43F5E" },
+        secondary: { main: "#A855F7" },
+
+        background: {
+          default: "#09090B",
+          paper: "#18181B",
+        },
+
+        text: {
+          primary: "#FAFAFA",
+          secondary: "#A1A1AA",
+        },
       },
     },
   },
 
-  // 4️⃣ Ocean Slate (Enterprise / Dashboards / Serious tools)
-  oceanDark: {
-    name: "Ocean Slate",
-    palette: {
-      mode: "dark",
+  ocean: {
+    name: "Ocean",
+    light: {
+      palette: {
+        mode: "light",
 
-      primary: {
-        main: "#6366F1", // subtle purple accents
-      },
-      secondary: {
-        main: "#0EA5E9", // clean blue actions
-      },
+        primary: { main: "#6366F1" },
+        secondary: { main: "#0EA5E9" },
 
-      background: {
-        default: "#020617", // deep slate
-        paper: "#0F172A", // card background
-      },
+        background: {
+          default: "#F8FAFC",
+          paper: "#FFFFFF",
+        },
 
-      text: {
-        primary: "#E2E8F0", // dashboard text
-        secondary: "#94A3B8", // labels, metadata
+        text: {
+          primary: "#0F172A",
+          secondary: "#475569",
+        },
+      },
+    },
+    dark: {
+      palette: {
+        mode: "dark",
+
+        primary: { main: "#6366F1" },
+        secondary: { main: "#0EA5E9" },
+
+        background: {
+          default: "#020617",
+          paper: "#0F172A",
+        },
+
+        text: {
+          primary: "#E2E8F0",
+          secondary: "#94A3B8",
+        },
       },
     },
   },
@@ -111,32 +170,31 @@ const THEMES = {
 
 /**
  * ===============================
- * 🔁 ACTIVE THEME (CHANGE THIS)
+ * 🔁 ACTIVE SETTINGS (CHANGE THESE)
  * ===============================
- * Options:
- * - "indigoDark"
- * - "emeraldDark"
- * - "roseDark"
- * - "oceanDark"
  */
-const ACTIVE_THEME = "oceanDark";
+
+// ✅ Select Palette
+const ACTIVE_THEME = "emerald"; // "indigo" | "emerald" | "rose" | "ocean"
+
+// ✅ Select Mode
+const ACTIVE_MODE = "dark"; // "light" | "dark"
 
 /**
  * ===============================
- * 🧱 CREATE FINAL THEME
+ * 🧱 CREATE FINAL THEME =========
  * ===============================
  */
 
 const theme = createTheme({
-  ...THEMES[ACTIVE_THEME],
+  ...THEMES[ACTIVE_THEME][ACTIVE_MODE],
 
   shape: {
-    borderRadius: 12, // consistent rounding across app
+    borderRadius: 12,
   },
 
   typography: {
-    fontFamily:
-      "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
+    fontFamily: "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
   },
 });
 
