@@ -40,7 +40,7 @@ const Dashboard = () => {
           >
             You are successfully logged in.
           </Typography>
-          
+
           <Button
             variant="contained"
             color="primary"
@@ -50,7 +50,7 @@ const Dashboard = () => {
           </Button>
         </Box>
       </Box>
-      <BottomNavBar/>
+      <BottomNavBar />
     </>
   );
 };

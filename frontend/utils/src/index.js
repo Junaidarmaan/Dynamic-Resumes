@@ -1,28 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider, CssBaseline } from "@mui/material";
 import TeddyAssistant from './components/assistant/TeddyAssistant';
 import { TeddyProvider, useTeddy } from "./context/TeddyContext";
 import { useUX, UXProvider } from "./context/UXContext";
 
 import App from "./App";
-import theme from "./theme/theme";
 import { AuthProvider } from "./context/AuthContext";
+import { ThemeController } from "./theme/themeController";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <UXProvider>
-
       <TeddyProvider>
         <AuthProvider>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
+          <ThemeController>
             <TeddyAssistant />
             <App />
-          </ThemeProvider>
+          </ThemeController>
         </AuthProvider>
       </TeddyProvider>
     </UXProvider>
   </BrowserRouter>
+
 );

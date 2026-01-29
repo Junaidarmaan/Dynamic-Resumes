@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { useEffect } from "react";
+import React from "react";
 /**
  * ===============================
  * 🎨 COLOR PALETTES (LIGHT + DARK)
@@ -175,27 +175,23 @@ const THEMES = {
  */
 
 // ✅ Select Palette
-const ACTIVE_THEME = "emerald"; // "indigo" | "emerald" | "rose" | "ocean"
-
-// ✅ Select Mode
-const ACTIVE_MODE = "dark"; // "light" | "dark"
-
+// "light" | "dark"
 /**
  * ===============================
  * 🧱 CREATE FINAL THEME =========
  * ===============================
  */
 
-const theme = createTheme({
-  ...THEMES[ACTIVE_THEME][ACTIVE_MODE],
+export const buildTheme = (paletteName, mode) => {
+  return createTheme({
+    ...THEMES[paletteName][mode],
 
-  shape: {
-    borderRadius: 12,
-  },
+    shape: {
+      borderRadius: 12,
+    },
 
-  typography: {
-    fontFamily: "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-  },
-});
-
-export default theme;
+    typography: {
+      fontFamily: "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
+    },
+  });
+};

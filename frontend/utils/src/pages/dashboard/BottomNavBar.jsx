@@ -1,10 +1,22 @@
 import React from "react";
 import { Paper, BottomNavigation, BottomNavigationAction } from "@mui/material";
 import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from "@mui/icons-material/Logout";
 import DescriptionIcon from "@mui/icons-material/Description";
+import { useAuth } from "../../context/AuthContext";
 
 const BottomNavBar = () => {
   const [value, setValue] = React.useState(0);
+  const { logout } = useAuth();
+
+  const handleChange = (event, newValue) => {
+    // If Logout tab clicked
+    if (newValue === 2) {
+      logout();
+      return;
+    }
+    setValue(newValue);
+  };
 
   return (
     <Paper
@@ -26,7 +38,7 @@ const BottomNavBar = () => {
     >
       <BottomNavigation
         value={value}
-        onChange={(event, newValue) => setValue(newValue)}
+        onChange={handleChange}
         showLabels
         sx={{
           backgroundColor: "transparent",
@@ -50,7 +62,18 @@ const BottomNavBar = () => {
           sx={{
             color: "text.secondary",
             "&.Mui-selected": {
-              color: "secondary.secondary",
+              color: "secondary.main",
+            },
+          }}
+        />
+
+        <BottomNavigationAction
+          label="Logout"
+          icon={<LogoutIcon />}
+          sx={{
+            color: "text.secondary",
+            "&.Mui-selected": {
+              color: "error.main",
             },
           }}
         />
